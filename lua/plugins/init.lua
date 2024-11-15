@@ -10,7 +10,7 @@ return {
 			vim.cmd([[colorscheme carbonfox]])
 		end,
 	},
-	
+
 	-- plenary
 	{
 		"nvim-lua/plenary.nvim",
@@ -39,5 +39,17 @@ return {
 	-- fd (alt to find)
 	{
 		dir = "/opt/homebrew/bin/fd"
+	},
+
+	-- lualine
+	{
+		"nvim-lualine/lualine.nvim",
+		opts = {
+		options = {
+			theme = "palenight"
+			-- palenight, nord, moonfly, and nightfly are all nice
+		}
+	},
+		dependencies = { "nvim-tree/nvim-web-devicons" }
 	},
 }
