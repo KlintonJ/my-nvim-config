@@ -10,7 +10,7 @@ return {
 				"<cmd>Trouble diagnostics toggle<cr>",
 				desc = "Toggle Trouble Diagnostics"
 			},
-			
+
 			{
 				"n", "<leader>dn", function()
 					require("trouble").next({skip_groups = true, jump = true})
