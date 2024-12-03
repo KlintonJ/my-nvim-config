@@ -1,6 +1,7 @@
 return {
 	{
 		"danymat/neogen",
+		enabled = false,
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 			"L3MON4D3/LuaSnip",
