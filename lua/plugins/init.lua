@@ -36,11 +36,6 @@ return {
 		"nvim-telescope/telescope-fzy-native.nvim"
 	},
 
-	-- fd (alt to find)
-	{
-		dir = "/opt/homebrew/bin/fd"
-	},
-
 	-- lualine
 	{
 		"nvim-lualine/lualine.nvim",
