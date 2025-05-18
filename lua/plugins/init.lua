@@ -1,15 +1,29 @@
 -- for default or low effort config'd plugins
 return {
 	-- colorscheme
+	-- for moonfly (new); nightfox/carbonfox commented for easy swapping
 	{
-		"EdenEast/nightfox.nvim",
+		"bluz71/vim-moonfly-colors",
+		name = "moonfly",
 		lazy = false,
 		priority = 1000,
 		config = function()
 			-- load here
-			vim.cmd([[colorscheme carbonfox]])
+			vim.cmd [[colorscheme moonfly]]
 		end,
 	},
+	-- {
+	--	"EdenEast/nightfox.nvim",
+	--	lazy = false,
+	--	priority = 1000,
+	--	config = function()
+	--		-- load here
+	--		vim.cmd([[colorscheme carbonfox]])
+	--	end,
+	-- },
+	--
+	-- might try brightburn some day?
+	-- https://github.com/erikbackman/brightburn.vim
 
 	-- plenary
 	{
@@ -41,7 +55,7 @@ return {
 		"nvim-lualine/lualine.nvim",
 		opts = {
 		options = {
-			theme = "palenight"
+			theme = "moonfly"
 			-- palenight, nord, moonfly, and nightfly are all nice
 		}
 	},

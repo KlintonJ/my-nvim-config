@@ -1,124 +1,72 @@
--- lsp config here
+-- ~/.config/nvim/lua/plugins/lsp.lua
 return {
 	{
-		"neovim/nvim-lspconfig",
+		"williamboman/mason.nvim",
 		lazy = false,
-		dependencies = {
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
-			-- for cmp
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/nvim-cmp",
-			"L3MON4D3/LuaSnip",
-			"saadparwaiz1/cmp_luasnip",
-			-- for fidget
-			"j-hui/fidget.nvim"
-		},
-		-- configured according to mason-lspconfig guidance
-		-- order: fidget -> mason -> mason-lspconfig -> servers started w/ lspconfig -> nvim-cmp
 		config = function()
-			-- configure fidget here 
-			require("fidget").setup({})
-
-			-- configure mason here
 			require("mason").setup({
-			ui = {
-				icons = {
-					package_installed = "✓",
-            				package_pending = "➜",
-            				package_uninstalled = "✗"
-				}
-			}})
+				ui = {
+					icons = {
+						package_installed = "✓",
+						package_pending = "➜",
+						package_uninstalled = "✗",
+					},
+				},
+			})
+		end,
+	},
 
-			-- configure mason-lspconfig here
+	{
+		"williamboman/mason-lspconfig.nvim",
+		lazy = false,
+		dependencies = { "mason.nvim", "neovim/nvim-lspconfig" },
+		config = function()
 			require("mason-lspconfig").setup({
-				-- servers in use, whether personally configured or not, go here.
-				-- exceptions are servers that mason does not have, or if you want
-				-- to use a builtin server (clangd).
-				ensure_installed = { "zls", "basedpyright", "lua_ls", "clangd" },
+				ensure_installed = { "zls", "lua_ls", "basedpyright" },
 				handlers = {
-					-- default handler
-					function(server_name)
-						require("lspconfig")[server_name].setup{}
-					end,
-
-					-- servers that you wish to override default settings will go here.
-					-- all other in ensure_installed will pass through the default handler.
-					-- syntax: [server_name] = function()
-						-- require("X_Y_Z").setup({})
-					-- end,
-					-- "X_Y_Z" here is determined by the lsp server's recommendations/docs
-					["lua_ls"] = function()
+					-- per‑server overrides
+					lua_ls = function()
 						require("lspconfig").lua_ls.setup({
 							settings = {
-								Lua = {
-									diagnostics = {
-										globals = { "vim" }
-									}
-								}
-							}
+								Lua = { diagnostics = { globals = { "vim" } } },
+							},
 						})
 					end,
-
-					["basedpyright"] = function()
+					basedpyright = function()
 						require("lspconfig").basedpyright.setup({
 							settings = {
-								basedpyright = {
-									analysis = {
-										reportMissingSuperCall = false,
-									}
-								}
-							}
+								basedpyright = { analysis = { reportMissingSuperCall = false } },
+							},
 						})
+					end,
+					-- default handler for other servers
+					function(server_name)
+						require("lspconfig")[server_name].setup({})
 					end,
 				},
 			})
 
-			-- configure cmp here
-			local cmp = require('cmp')
-			cmp.setup({
-			    snippet = {
-				-- REQUIRED - you must specify a snippet engine
-				expand = function(args)
-					require("luasnip").lsp_expand(args.body)
-			      end,
-			    },
-			    window = {
-			      -- completion = cmp.config.window.bordered(),
-			      -- documentation = cmp.config.window.bordered(),
-			    },
-			    mapping = cmp.mapping.preset.insert({
-				    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-				    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-				    ["<C-Space>"] = cmp.mapping.complete(),
-				    ["<C-e>"] = cmp.mapping.abort(),
-				    ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item.
-				    -- ^^Set `select` to `false` to only confirm explicitly selected items.
-			    }),
-			    sources = cmp.config.sources({
-				    { name = "nvim_lsp" },
-				    { name = 'luasnip' }, -- For luasnip users.
-			    },
-			    {
-				    { name = "buffer" },
-			    })
-		    })
+			-- global diagnostic config
+			vim.diagnostic.config({
+				virtual_text = true,
+				update_in_insert = true,
+				float = {
+					focusable = false,
+					style = "minimal",
+					border = "rounded",
+					source = "always",
+					header = "",
+					prefix = "",
+				},
+			})
+		end,
+	},
 
-		    vim.diagnostic.config({
-			    virtual_text = true,
-			    update_in_insert = true,
-			    float = {
-				    focusable = false,
-				    style = "minimal",
-				    border = "rounded",
-				    source = "always",
-				    header = "",
-				    prefix = "",
-			    },
-		    })
-	    end,
-    },
-
+	{
+		"neovim/nvim-lspconfig",
+		lazy = false,
+		dependencies = { "mason.nvim", "mason-lspconfig.nvim" },
+		-- no extra config here, since mason‑lspconfig’s handlers set up each server
+	},
 }
+

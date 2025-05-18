@@ -3,7 +3,7 @@ return {
 		"folke/trouble.nvim",
 		opts = { use_lsp_diagnostics = true },
 		cmd = "Trouble",
-		keys = 
+		keys =
 		{
 			{
 				"<leader>ts",
