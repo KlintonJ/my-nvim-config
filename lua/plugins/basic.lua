@@ -33,6 +33,36 @@ return {
 	-- treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		config = function()
+			local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+			parser_config.mips = {
+				install_info = {
+					url = "https://github.com/omeyenburg/tree-sitter-mips",
+					branch = "main",
+					files = { "src/parser.c", "src/scanner.c" },
+					generate_requires_npm = false,
+					requires_generate_from_grammar = false,
+				},
+			}
+
+			-- Option B (preferred on Neovim ≥0.9): map ft → parser
+			vim.treesitter.language.register("mips", { "asm", "vmasm" }) -- use the mips parser for these filetypes
+
+			require("nvim-treesitter.configs").setup({
+				highlight = { enable = true },
+				ensure_installed = { -- or run :TSInstall XXXXX
+					"mips",
+					"python",
+					"c", "cpp", "cuda",
+					"lua",
+					"vim", "vimdoc",
+					"query",
+					"zig",
+				},
+					auto_install = false,
+				})
+		end,
 	},
 
 	-- web-devicons
@@ -41,9 +71,9 @@ return {
 	},
 
 	-- ripgrep
-	{
-		"BurntSushi/ripgrep",
-	},
+	-- {
+		-- "BurntSushi/ripgrep",
+	-- },
 
 	-- telescope-fzy-native
 	{

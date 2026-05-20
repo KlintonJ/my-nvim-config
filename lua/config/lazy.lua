@@ -18,8 +18,12 @@ vim.opt.rtp:prepend(lazypath)
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+-- NOTE: mapleader/maplocalleader now set in top-level init.lua
+-- vim.g.mapleader = " "
+-- vim.g.maplocalleader = "\\"
+vim.api.nvim_set_option("clipboard", "unnamedplus")
+vim.lsp.set_log_level("ERROR")
+vim.o.termguicolors = true
 
 -- Setup lazy.nvim
 require("lazy").setup({
@@ -28,7 +32,6 @@ require("lazy").setup({
     { import = "plugins" },
   },
   -- Configure any other settings here. See the documentation for more details.
-
   -- colorscheme that will be used when installing plugins.
   install = { colorscheme = { "habamax" } },
   -- automatically check for plugin updates

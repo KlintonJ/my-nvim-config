@@ -12,17 +12,17 @@ return {
 			},
 
 			{
-				"n", "<leader>dn", function()
-					require("trouble").next({skip_groups = true, jump = true})
-				end,
-				desc = "Project-wide diagnostics jump (next)"
+				"<leader>dn",
+                                function() require("trouble").next({skip_groups = true, jump = true}) end,
+				desc = "Project-wide diagnostics jump (next)",
+                                mode = "n"
 			},
 
 			{
-				"n", "<leader>dp", function()
-					require("trouble").previous({skip_groups = true, jump = true})
-				end,
-				desc = "Project-wide diagnostics jump (prev)"
+				"<leader>dp",
+                                function() require("trouble").previous({skip_groups = true, jump = true}) end,
+				desc = "Project-wide diagnostics jump (prev)",
+                                mode = "n"
 			},
 
 			{

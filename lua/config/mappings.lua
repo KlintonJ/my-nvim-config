@@ -4,7 +4,7 @@
 -- be found in the keys portion of their config.
 
 -- leader
-vim.g.mapleader = " "
+-- vim.g.mapleader = " "
 
 local vk = vim.keymap
 
