@@ -24,6 +24,7 @@ return {
 
       -- cmp setup
       local cmp = require("cmp")
+      local types = require("cmp.types")
       cmp.setup({
         snippet = { expand = safe_expand },
         mapping = cmp.mapping.preset.insert({
@@ -57,12 +58,15 @@ return {
           end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-        },
-
-        {
+          {
+            name = "nvim_lsp",
+            entry_filter = function(entry)
+              return entry:get_kind() ~= types.lsp.CompletionItemKind.Snippet
+            end,
+          },
+        }, {
           { name = "buffer" },
-          { name = "path"   },
+          { name = "path" },
         }),
       })
     end,
