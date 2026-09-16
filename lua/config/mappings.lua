@@ -25,4 +25,4 @@ vk.set("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete buffer" })
 vk.set("n", "<leader>as", ":wa<CR>", { desc = "Save all files" })
 vk.set("n", "<leader>xa", ":qa<CR>", { desc = "Quit all files" })
 
-vim.opt.colorcolumn = "81"
+vim.opt.colorcolumn = "121"

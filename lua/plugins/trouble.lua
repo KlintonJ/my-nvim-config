@@ -6,7 +6,7 @@ return {
 		keys =
 		{
 			{
-				"<leader>ts",
+				"<leader>tw",
 				"<cmd>Trouble diagnostics toggle<cr>",
 				desc = "Toggle Trouble Diagnostics"
 			},
@@ -26,7 +26,7 @@ return {
 			},
 
 			{
-				"<leader>tw",
+				"<leader>ts",
 				"<cmd>Trouble symbols toggle focus=false<cr>",
 				desc = "Toggle Trouble Symbols"
 			},
@@ -37,6 +37,11 @@ return {
 				desc = "Toggle Trouble Quickfix list"
 			},
 
+      {
+        "<leader>refs",
+        "<cmd>Trouble lsp_references toggle focus=true<cr>",
+        desc = "Trouble LSP references list"
+      },
 		},
 	},
 }

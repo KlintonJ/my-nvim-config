@@ -3,7 +3,7 @@
 local servers = {
   "zls",
   "lua_ls",
-  "basedpyright",
+  -- "basedpyright",
   "clangd",
 }
 
@@ -153,30 +153,32 @@ return {
         capabilities = caps,
       })
 
-      vim.lsp.config("basedpyright", {
-        capabilities = caps,
-        settings = {
-          basedpyright = {
-            analysis = {
-              diagnosticMode = "openFilesOnly",
-              inlayHints = {
-                callArgumentNames = true,
-              },
-              fileEnumerationTimeout = 30,
-            },
-          },
-        },
-        root_dir = root_from_markers({
-          "pyrightconfig.json",
-          "pyproject.toml",
-          "setup.py",
-          "setup.cfg",
-          "requirements.txt",
-          ".git",
-        }, {
-          avoid_home = true,
-        }),
-      })
+      -- basedpyright broken again...
+      --
+      -- vim.lsp.config("basedpyright", {
+      --   capabilities = caps,
+      --   settings = {
+      --     basedpyright = {
+      --       analysis = {
+      --         diagnosticMode = "openFilesOnly",
+      --         inlayHints = {
+      --           callArgumentNames = true,
+      --         },
+      --         fileEnumerationTimeout = 30,
+      --       },
+      --     },
+      --   },
+      --   root_dir = root_from_markers({
+      --     "pyrightconfig.json",
+      --     "pyproject.toml",
+      --     "setup.py",
+      --     "setup.cfg",
+      --     "requirements.txt",
+      --     ".git",
+      --   }, {
+      --     avoid_home = true,
+      --   }),
+      -- })
 
       -----------------------------------------------------------------------
       -- Must happen AFTER vim.lsp.config(...) above.

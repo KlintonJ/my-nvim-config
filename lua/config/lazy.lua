@@ -22,7 +22,7 @@ vim.opt.rtp:prepend(lazypath)
 -- vim.g.mapleader = " "
 -- vim.g.maplocalleader = "\\"
 vim.api.nvim_set_option("clipboard", "unnamedplus")
-vim.lsp.set_log_level("ERROR")
+vim.lsp.log.set_level("ERROR")
 vim.o.termguicolors = true
 
 -- Setup lazy.nvim
